@@ -51,3 +51,9 @@
   /* border: 2px solid red; */
   padding: 16px;
 }
+.pages{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+}

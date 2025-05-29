@@ -9,24 +9,31 @@ const Pagination = () => {
   const API = `https://dummyjson.com/products`;
   const length = products.length;
   const productperpage = 6;
-const start= currentpage*productperpage;
-const end= start+ productperpage;
+  const start = currentpage * productperpage;
+  const end = start + productperpage;
 
-const clickpages= (pagenos)=>{
- 
-setcurrentpage(pagenos)
-}
-
-  const noofpages = (length / productperpage);
+  const clickpages = (pagenos) => {
+    setcurrentpage(pagenos);
+   };
+  // function gotonextpage() {
+  //   if (currentpage != noofpages - 1) setcurrentpage(currentpage + 1);
+  //   else "";
+  // }
+  function gotonextpage() {
+    if (currentpage != noofpages-1) setcurrentpage(prev =>prev + 1);
+  }
+  function gotoprevpage() {
+    if (currentpage != 0) setcurrentpage(prev=>prev - 1);
+  }
+  const noofpages = length / productperpage;
   function handlepage(n) {
     let result = [];
-    for (let i = 0; i < n ; i++) {
+    for (let i = 0; i < n; i++) {
       result.push(i);
     }
     return result;
   }
   const pagenos = handlepage(noofpages);
-
 
   // const pageNos = Array.from({ length: noofpages + 1 }, (_, i) => i + 1);
 
@@ -47,11 +54,17 @@ setcurrentpage(pagenos)
 
   return (
     <div className="">
-      <div >{pagenos.map((p,index)=>{
-        return (
-          <button onClick={()=>clickpages(p)} key={index}>{p}</button>
-        )
-      })}</div>
+      <div className="pages">
+        <button aria-label="prev button" onClick={gotoprevpage}>-</button>
+        {pagenos.map((p, index) => {
+          return (
+            <button onClick={() => clickpages(p)} key={index}>
+              {p}
+            </button>
+          );
+        })}
+        <button aria-label="next button" onClick={gotonextpage}>+</button>
+      </div>
       {/* <h1>{pageNos}</h1> */}
 
       <div className="prods">
